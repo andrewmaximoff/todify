@@ -1,0 +1,10 @@
+body {
+  padding-bottom: 20px;
+  padding-top: 0%;
+}
+.navbar {
+  margin-bottom: 20px;
+}
+body {
+  overflow-x: hidden; /* Prevent scroll on narrow devices */
+}

@@ -1,0 +1,18 @@
+<form method="post" action="{% url 'todo:task-update' form.instance.pk %}" class="js-task-update-form">
+  {% csrf_token %}
+  <div class="modal-header">
+    <div class="d-flex justify-content-between align-items-center w-100">
+      <h4 class="modal-title">Update task</h4>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+  </div>
+  <div class="modal-body">
+    {% include 'todo/includes/partial_task_form.html' %}
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-primary">Update task</button>
+  </div>
+</form>

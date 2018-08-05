@@ -1,0 +1,23 @@
+{% for task in tasks %}
+  <div class="list-group shadow-sm" id="{{ task.pk }}">
+    <a href="#" class="list-group-item list-group-item-action disable-link">
+      <div class="d-flex justify-content-between align-items-center w-100">
+        <h5 class="list-group-item-heading">{% if task.completed %}&#10004;{% else %}<button type="button" class="btn
+        btn-outline-success btn-sm js-completed-task" data-url="{% url 'todo:task-completed' task.pk %}">Done</button>{% endif %} {{ task.title }}</h5>
+        <div>
+          <button type="button" class="btn btn-outline-warning btn-sm js-update-task" data-url="{% url 'todo:task-update' task.pk %}">Edit</button>
+          <button type="button" class="btn btn-outline-danger btn-sm js-delete-task" data-url="{% url 'todo:task-delete' task.pk %}">Delete</button>
+        </div>
+      </div>
+      <span class="d-block">{{ task.body }}</span>
+    </a>
+  </div>
+{% empty %}
+  <div class="media text-muted pt-3" draggable="false" ondragstart="false">
+    <div class="media-body pb-3 mb-0 small lh-125">
+      <div class="d-flex justify-content-between align-items-center w-100">
+        <strong class="text-gray-dark">No tasks yet.</strong>
+      </div>
+    </div>
+  </div>
+{% endfor %}

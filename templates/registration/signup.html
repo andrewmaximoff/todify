@@ -1,0 +1,63 @@
+<!-- templates/registration/signup.html -->
+{# Load the tag library #}
+{% load bootstrap4 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+
+{% block content %}
+  <div>
+    <ul class="error_msg">
+
+    </ul>
+  </div>
+  <div class="container h-100">
+    <div class="row h-100 justify-content-center align-items-center">
+      {# Display django.contrib.messages as Bootstrap alerts #}
+      {% bootstrap_messages %}
+      <form method="post" class="form" data-validate-username-url='{% url "accounts:validate_username" %}'
+        data-validate-email-url='{% url "accounts:validate_email" %}'>
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+          <button type="submit" class="btn btn-primary">
+            Submit
+          </button>
+          <a href="{% url 'login' %}">Do you have an account?</a>
+        {% endbuttons %}
+      </form>
+    </div>
+  </div>
+{% endblock %}
+
+<script>
+  $("#id_username").change(function () {
+    let form = $(this).closest("form");
+    $.ajax({
+      url: form.attr("data-validate-username-url"),
+      data: form.serialize(),
+      dataType: 'json',
+      success: function (data) {
+        if (data.is_taken) {
+          $( ".error_msg" ).before( `<li> ${data.error_message} </li>` );
+        }
+      }
+    });
+  });
+
+  $("#id_email").change(function () {
+    let form = $(this).closest("form");
+    $.ajax({
+      url: form.attr("data-validate-email-url"),
+      data: form.serialize(),
+      dataType: 'json',
+      success: function (data) {
+        if (data.is_taken) {
+          $( ".error_msg" ).before( `<li> ${data.error_message} </li>` );
+        }
+      }
+    });
+  });
+</script>
