@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.getenv('SECRET_KEY', 'CHANGE-ME')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('SECRET_KEY', False)
+DEBUG = os.getenv('DEBUG', False)
 
 ALLOWED_HOSTS = []
 
@@ -37,9 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+
     'bootstrap4',
-    'accounts',
-    'todo',
+
+    # Apps
+    'todify.accounts',
+    'todify.todo',
 ]
 
 MIDDLEWARE = [
